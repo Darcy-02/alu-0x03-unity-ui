@@ -4860,6 +4860,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   health: 5
+  scoreText: {fileID: 164059138}
+  healthText: {fileID: 0}
+  winLoseText: {fileID: 0}
+  winLoseBG: {fileID: 0}
 --- !u!1 &1271616078
 GameObject:
   m_ObjectHideFlags: 0
