@@ -18,14 +18,14 @@ public class PlayerController : MonoBehaviour
     private int score = 0;
     public Text scoreText;
 
-    /*[Header("Health Settings")]
+    [Header("Health Settings")]
     public int health = 5;
 
     
 
     public Text healthText;
 
-    public Text winLoseText;
+    /*public Text winLoseText;
 
     public Image winLoseBG;
     */
