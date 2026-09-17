@@ -16,18 +16,19 @@ public class PlayerController : MonoBehaviour
 
     [Header("Score Settings")]
     private int score = 0;
+    public Text scoreText;
 
-    [Header("Health Settings")]
+    /*[Header("Health Settings")]
     public int health = 5;
 
-    public Text scoreText;
+    
 
     public Text healthText;
 
     public Text winLoseText;
 
     public Image winLoseBG;
-
+    */
     // Store starting values to reset on Game Over
     private int startingScore;
     private int startingHealth;
@@ -39,12 +40,12 @@ public class PlayerController : MonoBehaviour
         mainCamera = Camera.main;
         cameraOffset = mainCamera.transform.position - transform.position;
 
-        startingScore = score;
-        startingHealth = health;
+        //startingScore = score;
+        //startingHealth = health;
 
         SetScoreText();
-        SetHealthText();
-        winLoseText.text = "";
+        //SetHealthText();
+        //winLoseText.text = "";
     }
 
     void FixedUpdate()
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("menu");
         }
         // Game Over check
-        if (health <= 0)
+        /*if (health <= 0)
         {
             winLoseText.text = "Game Over!";
             winLoseText.color = Color.white;
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour
 
         }
         SetHealthText();
+        */
     }
 
     void OnTriggerEnter(Collider other)
@@ -92,7 +94,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Trap collision
-        if (other.CompareTag("Trap"))
+        /*if (other.CompareTag("Trap"))
         {
             health--;
 
@@ -105,14 +107,15 @@ public class PlayerController : MonoBehaviour
             winLoseText.color = Color.black;
             winLoseBG.color = Color.green;
         }
+        */
     }
 
 
     void SetScoreText()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Score: " + score.ToString();
     }
-
+    /*
     void SetHealthText()
     {
         healthText.text = "Health: " + health;
@@ -124,4 +127,5 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(seconds); // Wait for the specified seconds
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
     }
+    */
 }
