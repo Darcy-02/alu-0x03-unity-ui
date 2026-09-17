@@ -48,15 +48,12 @@ public class PlayerController : MonoBehaviour
 
         if (health <= 0)
         {
-            // Only trigger once
             if (!winLoseBG.gameObject.activeSelf)
             {
                 winLoseText.text = "Game Over!";
                 winLoseText.color = Color.white;
                 winLoseBG.color = Color.red;
                 winLoseBG.gameObject.SetActive(true);
-
-                //call coroutine with 3 second delay
                 StartCoroutine(LoadScene(3));
             }
         }
@@ -79,10 +76,17 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Goal"))
         {
-            winLoseText.text = "You Win!";
-            winLoseText.color = Color.black;
-            winLoseBG.color = Color.green;
-            winLoseBG.gameObject.SetActive(true);
+            // Prevent triggering twice
+            if (!winLoseBG.gameObject.activeSelf)
+            {
+                winLoseText.text = "You Win!";
+                winLoseText.color = Color.black;
+                winLoseBG.color = Color.green;
+                winLoseBG.gameObject.SetActive(true);
+
+                // RESTART GAME AFTER 3 SECONDS
+                StartCoroutine(LoadScene(3));
+            }
         }
     }
 
@@ -95,7 +99,6 @@ public class PlayerController : MonoBehaviour
     {
         healthText.text = "Health: " + health;
     }
-
 
     private IEnumerator LoadScene(float seconds)
     {
