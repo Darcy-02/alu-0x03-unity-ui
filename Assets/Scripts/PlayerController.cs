@@ -5,59 +5,37 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement Settings")]
     public float speed = 5f;
-
     private Rigidbody rb;
-
-    [Header("Camera Settings")]
     private Camera mainCamera;
     private Vector3 cameraOffset;
 
-    [Header("Score Settings")]
     private int score = 0;
-
-    [Header("Health Settings")]
-    public int health = 5;
-
     public Text scoreText;
 
+    public int health = 5;
     public Text healthText;
-
     public Text winLoseText;
-
     public Image winLoseBG;
-
-    // Store starting values to reset on Game Over
-    private int startingScore;
-    private int startingHealth;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
         mainCamera = Camera.main;
         cameraOffset = mainCamera.transform.position - transform.position;
 
-        startingScore = score;
-        startingHealth = health;
-
         SetScoreText();
         SetHealthText();
-        //winLoseText.text = "";
+        winLoseText.text = "";
+        winLoseBG.gameObject.SetActive(false);
     }
 
     void FixedUpdate()
     {
-        // Player movement input (natural controls)
-        float moveX = Input.GetAxis("Horizontal"); // A/D or Left/Right
-        float moveZ = Input.GetAxis("Vertical");   // W/S or Up/Down
-
-        // Move only on X/Z axes
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(moveX, 0f, moveZ) * speed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + movement);
-
-        // Camera follows player
         mainCamera.transform.position = transform.position + cameraOffset;
     }
 
@@ -67,23 +45,25 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene("menu");
         }
-        // Game Over check
+
         if (health <= 0)
         {
-            winLoseText.text = "Game Over!";
-            winLoseText.color = Color.white;
-            winLoseBG.color = Color.red;
-            // Start coroutine to reload the scene after a delay
-            StartCoroutine(LoadScene(3f));
-            return;
+            // Only trigger once
+            if (!winLoseBG.gameObject.activeSelf)
+            {
+                winLoseText.text = "Game Over!";
+                winLoseText.color = Color.white;
+                winLoseBG.color = Color.red;
+                winLoseBG.gameObject.SetActive(true);
 
+                //call coroutine with 3 second delay
+                StartCoroutine(LoadScene(3));
+            }
         }
-        SetHealthText();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        // Coin collection
         if (other.CompareTag("Pickup"))
         {
             score++;
@@ -91,22 +71,20 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        // Trap collision
         if (other.CompareTag("Trap"))
         {
             health--;
-
+            SetHealthText();
         }
 
-        // Goal reached
         if (other.CompareTag("Goal"))
         {
             winLoseText.text = "You Win!";
             winLoseText.color = Color.black;
             winLoseBG.color = Color.green;
+            winLoseBG.gameObject.SetActive(true);
         }
     }
-
 
     void SetScoreText()
     {
@@ -115,15 +93,13 @@ public class PlayerController : MonoBehaviour
 
     void SetHealthText()
     {
-        if(healthText != null)
-
-            healthText.text = "Health: " + health;
+        healthText.text = "Health: " + health;
     }
 
-    // Coroutine to wait for a specified time before reloading the scene
+
     private IEnumerator LoadScene(float seconds)
     {
-        yield return new WaitForSeconds(seconds); // Wait for the specified seconds
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
+        yield return new WaitForSeconds(seconds);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
