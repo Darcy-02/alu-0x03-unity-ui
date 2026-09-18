@@ -1,21 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-
+    public Material trapMat;
+    public Material goalMat;
+    public Toggle colorblindMode;
 
     public void PlayMaze()
     {
-        // Load the Maze scene. Replace "MazeSceneName" with the actual name of your scene.
+        if (colorblindMode.isOn)
+        {
+            trapMat.color = new Color32(255, 112, 0, 255);
+            goalMat.color = Color.blue;
+        }
+        else
+        {
+            // reset to original red / green
+            trapMat.color = Color.red;
+            goalMat.color = Color.green;
+        }
+
         SceneManager.LoadScene("maze");
     }
+
     public void QuitMaze()
     {
         Debug.Log("Quit Game");
         Application.Quit();
-
     }
 }
