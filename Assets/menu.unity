@@ -188,7 +188,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 69999133}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 604187728}
+        m_MethodName: QuitMaze
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainMenu.QuitMaze()
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &69999133
@@ -537,6 +548,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 604187727}
+  - component: {fileID: 604187728}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -565,6 +577,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 250, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &604187728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 604187726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b3b973aaaa0134c9d97d8dcfe6cefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &847208338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,7 +1062,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2115817251}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 604187728}
+        m_MethodName: PlayMaze
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainMenu.PlayMaze()
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2115817251
